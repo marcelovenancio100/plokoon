@@ -1,0 +1,4 @@
+br\com\vnx\dynamodb\DynamoDBConfig.class
+br\com\vnx\grievous\GrievousRequestHandler.class
+br\com\vnx\dao\GrievousDAO.class
+br\com\vnx\model\Grievous.class
