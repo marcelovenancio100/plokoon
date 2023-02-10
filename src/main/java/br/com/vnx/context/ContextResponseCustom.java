@@ -1,4 +1,4 @@
-package br.com.vnx.contexts;
+package br.com.vnx.context;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

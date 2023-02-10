@@ -31,7 +31,7 @@ public class GrievousRepository {
         try {
             grievous = dynamoDbTable.getItem(Key.builder().partitionValue(key).build());
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao buscar registro pela chave.", e);
+        	LOG.error(() -> "Erro ao buscar item na base.", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -47,7 +47,7 @@ public class GrievousRepository {
 		try {
 			dynamoDbTable.putItem(grievous);
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao salvar registro.", e);
+        	LOG.error(() -> "Erro ao salvar item na base.", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -58,7 +58,13 @@ public class GrievousRepository {
 	 * @param grievous Grievous
 	 */
 	public void update(Grievous grievous) {
-		//TODO
+		try {
+			dynamoDbTable.updateItem(grievous);
+        } catch (DynamoDbException e) {
+        	LOG.error(() -> "Erro ao atualizar item na base.", e);
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
 	}
 	
 	/**
@@ -66,6 +72,12 @@ public class GrievousRepository {
 	 * @param key String
 	 */
 	public void delete(String key) {
-		//TODO
+		try {
+			dynamoDbTable.deleteItem(Key.builder().partitionValue(key).build());
+        } catch (DynamoDbException e) {
+        	LOG.error(() -> "Erro ao excluir item na base.", e);
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
 	}
 }
