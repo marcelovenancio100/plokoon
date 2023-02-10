@@ -1,4 +1,4 @@
-package br.com.vnx.model;
+package br.com.vnx.model.entities;
 
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
