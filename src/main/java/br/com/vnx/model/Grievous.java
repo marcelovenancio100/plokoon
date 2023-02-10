@@ -6,17 +6,14 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 @DynamoDbBean
 public class Grievous {
 	private String name;
-
 	private String email;
-
 	private Integer batles;
-
 	private Integer victories;
-
 	private Integer defeats;
 
 	public Grievous() {}
 
+	@DynamoDbPartitionKey
 	public String getName() {
 		return name;
 	}
@@ -25,7 +22,6 @@ public class Grievous {
 		this.name = name;
 	}
 
-	@DynamoDbPartitionKey
 	public String getEmail() {
 		return email;
 	}
