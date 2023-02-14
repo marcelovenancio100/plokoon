@@ -10,7 +10,7 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 import software.amazon.awssdk.utils.Logger;
 
 public class GrievousRepository {
-	private final Logger LOG = Logger.loggerFor(this.getClass());
+	private final Logger logger = Logger.loggerFor(this.getClass());
 	
 	private DynamoDbEnhancedClient ddb;
 	private DynamoDbTable<Grievous> dynamoDbTable;
@@ -29,9 +29,10 @@ public class GrievousRepository {
 		Grievous grievous = null;
 
         try {
+        	logger.info(() -> "BUSCANDO ITEM ... ");
             grievous = dynamoDbTable.getItem(Key.builder().partitionValue(key).build());
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao buscar item na base.", e);
+        	logger.error(() -> "ERRO AO BUSCAR ITEM NA BASE: ", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -45,9 +46,10 @@ public class GrievousRepository {
 	 */
 	public void save(Grievous grievous) {
 		try {
+			logger.info(() -> "SALVANDO ITEM ... ");
 			dynamoDbTable.putItem(grievous);
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao salvar item na base.", e);
+        	logger.error(() -> "ERRO AO SALVAR ITEM NA BASE: ", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -59,9 +61,10 @@ public class GrievousRepository {
 	 */
 	public void update(Grievous grievous) {
 		try {
+			logger.info(() -> "ATUALIZANDO ITEM ... ");
 			dynamoDbTable.updateItem(grievous);
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao atualizar item na base.", e);
+        	logger.error(() -> "ERRO AO ATUALIZAR ITEM NA BASE: ", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
@@ -73,9 +76,10 @@ public class GrievousRepository {
 	 */
 	public void delete(String key) {
 		try {
+			logger.info(() -> "EXCLUINDO ITEM ... ");
 			dynamoDbTable.deleteItem(Key.builder().partitionValue(key).build());
         } catch (DynamoDbException e) {
-        	LOG.error(() -> "Erro ao excluir item na base.", e);
+        	logger.error(() -> "ERRO AO EXCLUIR ITEM NA BASE: ", e);
             System.err.println(e.getMessage());
             System.exit(1);
         }
